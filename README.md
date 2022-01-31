@@ -4,8 +4,11 @@
 ## Install Steps
 
   1.Clone the git repository git clone https://github.com/princeofv/react-media-lightbox.git
+
     Get into the directory
+
   2.cd react-media-lightbox
+
   3.Then install the node modules dependencies npm install
 ## Startup Instructions
  Start the react web application.
