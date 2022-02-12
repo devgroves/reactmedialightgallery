@@ -42,6 +42,16 @@ const useStyles = makeStyles((theme) =>
       },
       backgroundColor: "#696969",
     },
+    audioPlayer: {
+      alignItems: "center",
+      justifyContent: "center",
+      width: "30%",
+      height: "auto",
+    },
+    circular: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
   })
 );
 
@@ -100,15 +110,12 @@ export default function LightBox(props) {
     }
   };
 
+  const ItemCount = () => {};
+
   return (
     <>
       {toggler ? (
-        <Modal
-          open={toggler}
-          onClose={toggleIsOpen}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
+        <Modal open={toggler} onClose={toggleIsOpen}>
           <div className="lsbox">
             <div className="lightbox-header">
               <div className="item-count">
@@ -141,21 +148,13 @@ export default function LightBox(props) {
                     </video>
                   </div>
                 ) : mediaItems1[currentSlide].type === "AUDIO" ? (
-                  <div
-                    className="audio-player"
-                    style={{
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "30%",
-                      height: "auto",
-                    }}
-                  >
+                  <div className={classes.audioPlayer}>
                     <audio src={media} controls autoPlay />
                   </div>
                 ) : null}
               </div>
             ) : (
-              <div style={{ alignItems: "center", justifyContent: "center" }}>
+              <div style={classes.circular}>
                 <CircularProgress size={80} />
               </div>
             )}
