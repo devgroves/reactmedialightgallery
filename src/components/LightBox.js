@@ -13,16 +13,8 @@ const useStyles = makeStyles((theme) =>
       justifyContent: "space-around",
       overflow: "hidden",
     },
-    gridList: {
-      width: "100%",
-      height: "auto",
-    },
     icon: {
       color: "rgba(255, 255, 255, 0.54)",
-    },
-    mediaListTile: {
-      height: "auto",
-      padding: "6px 4px",
     },
     button: {
       color: "black",
@@ -109,9 +101,6 @@ export default function LightBox(props) {
       setCurrentSlide(currentIndex + 1);
     }
   };
-
-  const ItemCount = () => {};
-
   return (
     <>
       {toggler ? (
