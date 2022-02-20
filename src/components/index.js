@@ -52,11 +52,11 @@ export default function Home() {
     <div>
       <h3>Examples</h3>
       <div>
-        <Box sx={{ flexGrow: 1, marginLeft: 10, marginRight: 10 }}>
+        <Box sx={{  marginLeft: 10, marginRight: 10 }}>
           {data ? (
             data?.map((val, i) => (
-              <Grid container spacing={2} key={i}>
-                <Grid item xs={12} md={12}>
+              <Grid container spacing={1} key={i}>
+                <Grid item xs={4} sm={4} md={4}>
                   <Item
                     onClick={() => {
                       setCurrentSlide(i);
@@ -79,7 +79,7 @@ export default function Home() {
                       <h2> This Media file is not Supported</h2>
                     )}
                   </Item>
-                </Grid>
+                  </Grid>
               </Grid>
             ))
           ) : (

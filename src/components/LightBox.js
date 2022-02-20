@@ -53,10 +53,7 @@ export default function LightBox(props) {
   const [toggler, setToggler] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(props.currentSlide);
   const [media, setMedia] = useState("");
-  useEffect(() => {
-    console.log("set media items", mediaItems[currentSlide].media);
-    setMedia(mediaItems[currentSlide].media);
-  }, [mediaItems, currentSlide]);
+  
 
   const toggleIsOpen = () => {
     console.log('toggle is open', toggler);
@@ -72,6 +69,7 @@ export default function LightBox(props) {
     } else {
       setCurrentSlide(currentIndex - 1);
     }
+    setMedia(mediaItems[currentSlide].media);
     parentShowPrev(e);
   };
   const showNext = (e) => {
@@ -82,6 +80,7 @@ export default function LightBox(props) {
     } else {
       setCurrentSlide(currentIndex + 1);
     }
+    setMedia(mediaItems[currentSlide].media);
     //shownext chaining parent event method definition also.
     parentShowNext(e);
   };
