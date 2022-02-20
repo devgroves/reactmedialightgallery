@@ -23,10 +23,6 @@ const data = [
     type: "VIDEO",
   },
   {
-    media: audio1,
-    type: "AUDIO",
-  },
-  {
     media: image3,
     type: "IMAGE",
   },
@@ -38,6 +34,10 @@ const data = [
     media: image5,
     type: "IMAGE",
   },
+  {
+    media: audio1,
+    type: "AUDIO",
+  }
 ];
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -53,9 +53,8 @@ export default function Home() {
       <h3>Examples</h3>
       <div>
         <Box sx={{  marginLeft: 10, marginRight: 10 }}>
-          {data ? (
-            data?.map((val, i) => (
-              <Grid container spacing={1} key={i}>
+            <Grid container spacing={1}>
+            {data?.map((val, i) => (
                 <Grid item xs={4} sm={4} md={4}>
                   <Item
                     onClick={() => {
@@ -66,12 +65,12 @@ export default function Home() {
                     {val.type === "IMAGE" ? (
                       <img src={val.media} height="300px" width="300px" />
                     ) : val.type === "VIDEO" ? (
-                      <video width="320" height="240" controls>
+                      <video width="320" height="300" controls>
                         <source src={val.media} type="video/mp4" />
                         <source src={val.media} type="video/ogg" />
                       </video>
                     ) : val.type === "AUDIO" ? (
-                      <audio controls>
+                      <audio style={{ height: "300px" }} controls>
                         <source src={val.media} type="audio/ogg" />
                         <source src={val.media} type="audio/mpeg" />
                       </audio>
@@ -79,12 +78,9 @@ export default function Home() {
                       <h2> This Media file is not Supported</h2>
                     )}
                   </Item>
-                  </Grid>
-              </Grid>
-            ))
-          ) : (
-            <h3>No Data</h3>
-          )}
+                </Grid>
+            ))}
+            </Grid>
         </Box>
         {toggler ? (
           <LightBox
