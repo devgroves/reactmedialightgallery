@@ -1,6 +1,10 @@
 # react-media-lightbox 
 
   This light box supported all the media files 
+# Packages Used
+  Material Ui - https://mui.com/
+ ### npm install @mui/material @emotion/react @emotion/styled
+
 ## Install Steps
 
   1.Clone the git repository git clone https://github.com/princeofv/react-media-lightbox.git
