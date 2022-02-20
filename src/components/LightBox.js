@@ -49,36 +49,17 @@ const useStyles = makeStyles((theme) =>
 
 export default function LightBox(props) {
   const classes = useStyles();
-  const { mediaItems, callback } = props;
-  const mediaItems1 = [];
+  const { mediaItems, callback, parentShowNext, parentShowPrev } = props;
   const [toggler, setToggler] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(props.currentSlide);
   const [media, setMedia] = useState("");
-  mediaItems?.map((mediaData, index) => {
-    if (mediaData.type === "IMAGE" && mediaData.media) {
-      mediaItems1.push({
-        url: mediaData.media,
-        type: mediaData.type,
-      });
-    }
-    if (mediaData.type === "VIDEO" && mediaData.media) {
-      mediaItems1.push({
-        url: mediaData.media,
-        type: mediaData.type,
-      });
-    }
-    if (mediaData.type === "AUDIO" && mediaData.media) {
-      mediaItems1.push({
-        url: mediaData.media,
-        type: mediaData.type,
-      });
-    }
-  });
   useEffect(() => {
-    setMedia(mediaItems1[currentSlide].url);
-  });
+    console.log("set media items", mediaItems[currentSlide].media);
+    setMedia(mediaItems[currentSlide].media);
+  }, [mediaItems, currentSlide]);
 
   const toggleIsOpen = () => {
+    console.log('toggle is open', toggler);
     setToggler(!toggler);
     callback();
   };
@@ -87,19 +68,22 @@ export default function LightBox(props) {
     e.stopPropagation();
     const currentIndex = currentSlide;
     if (currentIndex <= 0) {
-      setCurrentSlide(mediaItems1.length - 1);
+      setCurrentSlide(mediaItems.length - 1);
     } else {
       setCurrentSlide(currentIndex - 1);
     }
+    parentShowPrev(e);
   };
   const showNext = (e) => {
     e.stopPropagation();
     const currentIndex = currentSlide;
-    if (currentIndex >= mediaItems1.length - 1) {
+    if (currentIndex >= mediaItems.length - 1) {
       setCurrentSlide(0);
     } else {
       setCurrentSlide(currentIndex + 1);
     }
+    //shownext chaining parent event method definition also.
+    parentShowNext(e);
   };
   return (
     <>
@@ -109,7 +93,7 @@ export default function LightBox(props) {
             <div className="lightbox-header">
               <div className="item-count">
                 <h4 style={{ color: "#ffffff9e" }}>
-                  {currentSlide + 1}/{mediaItems1.length}
+                  {currentSlide + 1}/{mediaItems.length}
                 </h4>
               </div>
               <div className="close-btn">
@@ -125,25 +109,25 @@ export default function LightBox(props) {
             </div>
             {media ? (
               <div style={{ display: "contents" }}>
-                {mediaItems1[currentSlide].type === "IMAGE" ? (
+                {mediaItems[currentSlide].type === "IMAGE" ? (
                   <>
-                    <img src={media} className={classes.lightbox} />
+                    <img src={media} alt="Image Broken" className={classes.lightbox} />
                   </>
-                ) : mediaItems1[currentSlide].type === "VIDEO" ? (
+                ) : mediaItems[currentSlide].type === "VIDEO" ? (
                   <div>
                     <video className={classes.lightbox} controls>
                       <source src={media} type="video/mp4" />
                       <source src={media} type="video/ogg" />
                     </video>
                   </div>
-                ) : mediaItems1[currentSlide].type === "AUDIO" ? (
+                ) : mediaItems[currentSlide].type === "AUDIO" ? (
                   <div className={classes.audioPlayer}>
                     <audio src={media} controls autoPlay />
                   </div>
                 ) : null}
               </div>
             ) : (
-              <div style={classes.circular}>
+              <div className={classes.circular}>
                 <CircularProgress size={80} />
               </div>
             )}

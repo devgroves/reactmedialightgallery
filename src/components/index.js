@@ -39,7 +39,6 @@ const data = [
     type: "IMAGE",
   },
 ];
-
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -92,7 +91,14 @@ export default function Home() {
             currentSlide={currentSlide}
             mediaItems={data}
             toggler={toggler}
+            parentShowPrev = {(e) => {
+              console.log("show prev button clicked", e);
+            }}
+            parentShowNext = {(e) => {
+              console.log("show next button clicked", e);
+            }}
             callback={() => {
+              console.log("going to do a callback");
               setToggler(false);
             }}
           />
