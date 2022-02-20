@@ -3,7 +3,8 @@
   This light box supported all the media files 
 # Packages Used
   Material Ui - https://mui.com/
- ### npm install @mui/material @emotion/react @emotion/styled
+  
+    npm install @mui/material @emotion/react @emotion/styled
 
 ## Install Steps
 
