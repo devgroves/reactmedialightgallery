@@ -65,16 +65,17 @@ export default function Home() {
                     setCurrentSlide(i);
                     setToggler(true);
                   }}
+                  style={{ height: 250, alignItems: "center", display: "flex" }}
                 >
                   {val.type === "IMAGE" ? (
                     <img src={val.media} height="250px" width="100%" />
                   ) : val.type === "VIDEO" ? (
-                    <video width="100%" height="250px" controls>
+                    <video width="100%" height="100%" controls>
                       <source src={val.media} type="video/mp4" />
                       <source src={val.media} type="video/ogg" />
                     </video>
                   ) : val.type === "AUDIO" ? (
-                    <audio controls style={{ width: "100%" }}>
+                    <audio controls style={{}}>
                       <source src={val.media} type="audio/ogg" />
                       <source src={val.media} type="audio/mpeg" />
                     </audio>
