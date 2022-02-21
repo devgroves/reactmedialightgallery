@@ -56,21 +56,10 @@ export default function Home() {
     >
       <h3>Examples</h3>
       <div>
-        <div
-          style={{
-            marginLeft: 10,
-            marginRight: 10,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            // width: "100%",
-          }}
-        >
+        <div style={Style}>
           {data ? (
             data?.map((val, i) => (
-              // <Grid spacing={1} key={i}>
-              <Grid item xs={4} sm={4} md={3} key={i} style={{ margin: 5, height: "" }}>
+              <Grid item xs={3} sm={4} md={3} key={i} style={{ margin: 5 }}>
                 <Item
                   onClick={() => {
                     setCurrentSlide(i);
@@ -94,7 +83,6 @@ export default function Home() {
                   )}
                 </Item>
               </Grid>
-              // </Grid>
             ))
           ) : (
             <h3>No Data</h3>
@@ -123,3 +111,12 @@ export default function Home() {
     </div>
   );
 }
+
+const Style = {
+  marginLeft: 10,
+  marginRight: 10,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexWrap: "wrap",
+};
