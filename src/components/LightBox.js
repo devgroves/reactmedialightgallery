@@ -53,13 +53,16 @@ export default function LightBox(props) {
   const [toggler, setToggler] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(props.currentSlide);
   const [media, setMedia] = useState("");
-  
-
+  console.log("currentSlide", currentSlide, media);
   const toggleIsOpen = () => {
-    console.log('toggle is open', toggler);
+    console.log("toggle is open", toggler);
     setToggler(!toggler);
     callback();
   };
+  useEffect(() => {
+    console.log("set media items", mediaItems[currentSlide].media);
+    setMedia(mediaItems[currentSlide].media);
+  }, [mediaItems, currentSlide]);
 
   const showPrev = (e) => {
     e.stopPropagation();

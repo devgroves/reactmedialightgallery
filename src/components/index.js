@@ -49,52 +49,66 @@ export default function Home() {
   const [toggler, setToggler] = useState(false);
   const [currentSlide, setCurrentSlide] = useState();
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "gray",
+      }}
+    >
       <h3>Examples</h3>
       <div>
-        <Box sx={{  marginLeft: 10, marginRight: 10 }}>
+        <div
+          style={{
+            marginLeft: 10,
+            marginRight: 10,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            // width: "100%",
+          }}
+        >
           {data ? (
             data?.map((val, i) => (
-              <Grid container spacing={1} key={i}>
-                <Grid item xs={4} sm={4} md={4}>
-                  <Item
-                    onClick={() => {
-                      setCurrentSlide(i);
-                      setToggler(true);
-                    }}
-                  >
-                    {val.type === "IMAGE" ? (
-                      <img src={val.media} height="300px" width="300px" />
-                    ) : val.type === "VIDEO" ? (
-                      <video width="320" height="240" controls>
-                        <source src={val.media} type="video/mp4" />
-                        <source src={val.media} type="video/ogg" />
-                      </video>
-                    ) : val.type === "AUDIO" ? (
-                      <audio controls>
-                        <source src={val.media} type="audio/ogg" />
-                        <source src={val.media} type="audio/mpeg" />
-                      </audio>
-                    ) : (
-                      <h2> This Media file is not Supported</h2>
-                    )}
-                  </Item>
-                  </Grid>
+              // <Grid spacing={1} key={i}>
+              <Grid item xs={4} sm={4} md={3} key={i} style={{ margin: 5, height: "" }}>
+                <Item
+                  onClick={() => {
+                    setCurrentSlide(i);
+                    setToggler(true);
+                  }}
+                >
+                  {val.type === "IMAGE" ? (
+                    <img src={val.media} height="250px" width="100%" />
+                  ) : val.type === "VIDEO" ? (
+                    <video width="100%" height="250px" controls>
+                      <source src={val.media} type="video/mp4" />
+                      <source src={val.media} type="video/ogg" />
+                    </video>
+                  ) : val.type === "AUDIO" ? (
+                    <audio controls style={{ width: "100%" }}>
+                      <source src={val.media} type="audio/ogg" />
+                      <source src={val.media} type="audio/mpeg" />
+                    </audio>
+                  ) : (
+                    <h2> This Media file is not Supported</h2>
+                  )}
+                </Item>
               </Grid>
+              // </Grid>
             ))
           ) : (
             <h3>No Data</h3>
           )}
-        </Box>
+        </div>
         {toggler ? (
           <LightBox
             currentSlide={currentSlide}
             mediaItems={data}
             toggler={toggler}
-            parentShowPrev = {(e) => {
+            parentShowPrev={(e) => {
               console.log("show prev button clicked", e);
             }}
-            parentShowNext = {(e) => {
+            parentShowNext={(e) => {
               console.log("show next button clicked", e);
             }}
             callback={() => {
