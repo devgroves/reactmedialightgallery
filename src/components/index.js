@@ -25,10 +25,6 @@ const data = [
     type: "VIDEO",
   },
   {
-    media: audio1,
-    type: "AUDIO",
-  },
-  {
     media: image3,
     type: "IMAGE",
   },
@@ -39,6 +35,10 @@ const data = [
   {
     media: image5,
     type: "IMAGE",
+  },
+  {
+    media: audio1,
+    type: "AUDIO",
   },
 ];
 const Item = styled(Paper)(({ theme }) => ({

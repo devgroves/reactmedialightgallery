@@ -52,8 +52,8 @@ export default function LightBox(props) {
   const { mediaItems, callback, parentShowNext, parentShowPrev } = props;
   const [toggler, setToggler] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(props.currentSlide);
-  const [media, setMedia] = useState("");
-  console.log("currentSlide", currentSlide, media);
+  const [media, setMedia] = useState(mediaItems[currentSlide].media);
+
   const toggleIsOpen = () => {
     console.log("toggle is open", toggler);
     setToggler(!toggler);
@@ -66,24 +66,28 @@ export default function LightBox(props) {
 
   const showPrev = (e) => {
     e.stopPropagation();
-    const currentIndex = currentSlide;
+    let currentIndex = currentSlide;
     if (currentIndex <= 0) {
-      setCurrentSlide(mediaItems.length - 1);
+      currentIndex = mediaItems.length - 1;
     } else {
-      setCurrentSlide(currentIndex - 1);
+      currentIndex = currentIndex - 1;
     }
-    setMedia(mediaItems[currentSlide].media);
+    setCurrentSlide(currentIndex);
+    setMedia(mediaItems[currentIndex].media);
     parentShowPrev(e);
   };
   const showNext = (e) => {
     e.stopPropagation();
-    const currentIndex = currentSlide;
+    let currentIndex = currentSlide;
+    console.log("currentSlide before ", currentIndex, currentSlide);
     if (currentIndex >= mediaItems.length - 1) {
-      setCurrentSlide(0);
+      currentIndex = 0;
     } else {
-      setCurrentSlide(currentIndex + 1);
+      currentIndex = currentIndex + 1;
     }
-    setMedia(mediaItems[currentSlide].media);
+    setCurrentSlide(currentIndex);
+    console.log("currentSlide after ", currentIndex, currentSlide);
+    setMedia(mediaItems[currentIndex].media);
     //shownext chaining parent event method definition also.
     parentShowNext(e);
   };
