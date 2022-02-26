@@ -15,6 +15,7 @@ const data = [
   {
     media: image1,
     type: "IMAGE",
+    caption: "Sample Image 1",
   },
   {
     media: image2,
@@ -23,6 +24,7 @@ const data = [
   {
     media: video1,
     type: "VIDEO",
+    caption: "Sample Caption Video for Lightbox",
   },
   {
     media: image3,
@@ -39,6 +41,7 @@ const data = [
   {
     media: audio1,
     type: "AUDIO",
+    caption: "Sample Caption Audio for Lightbox",
   },
 ];
 const Item = styled(Paper)(({ theme }) => ({

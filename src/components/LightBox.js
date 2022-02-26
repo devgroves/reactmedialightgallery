@@ -102,6 +102,11 @@ export default function LightBox(props) {
                   {currentSlide + 1}/{mediaItems.length}
                 </h4>
               </div>
+              <div className="item-count">
+                <h5 style={{ color: "#fff" }}>
+                  {mediaItems[currentSlide].caption ? mediaItems[currentSlide].caption : ""}
+                </h5>
+              </div>
               <div className="close-btn">
                 <IconButton onClick={toggleIsOpen} className={classes.arrowButton} size="small">
                   <CloseIcon />
