@@ -91,10 +91,20 @@ export default function LightBox(props) {
     //shownext chaining parent event method definition also.
     parentShowNext(e);
   };
+  //Arrow keys handler
+  const keyDownHandler = (event) => {
+    console.log(event.code);
+    if (event.code === "ArrowLeft") {
+      showPrev(event);
+    }
+    if (event.code === "ArrowRight") {
+      showNext(event);
+    }
+  };
   return (
     <>
       {toggler ? (
-        <Modal open={toggler} onClose={toggleIsOpen}>
+        <Modal open={toggler} onClose={toggleIsOpen} onKeyDown={keyDownHandler}>
           <div className="lsbox">
             <div className="lightbox-header">
               <div className="item-count">
