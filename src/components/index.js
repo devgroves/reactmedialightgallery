@@ -3,6 +3,8 @@ import { Grid, Box, styled, Paper } from "@mui/material";
 import video1 from "./assets/city.mp4";
 import audio1 from "./assets/sample.mp3";
 import LightBox from "./LightBox";
+import bgAudio from "./assets/audio.png";
+import bgVideo from "./assets/video.jpg";
 const image1 =
   "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80";
 const image2 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrKHPsvNDJHY9tWpkHrfkfo8Dkf0LvZU3Hdg&usqp=CAU";
@@ -59,13 +61,20 @@ export default function Home() {
         <div style={Style}>
           {data ? (
             data?.map((val, i) => (
-              <Grid item xs={3} sm={4} md={3} key={i} style={{ margin: 5 }}>
+              <Grid item xs={6} sm={4} md={3} key={i} style={{ margin: 5 }}>
                 <Item
                   onClick={() => {
                     setCurrentSlide(i);
                     setToggler(true);
                   }}
-                  style={{ height: 250, alignItems: "center", display: "flex" }}
+                  style={{
+                    height: 250,
+                    alignItems: "center",
+                    display: "flex",
+                    backgroundImage:
+                      val.type === "AUDIO" ? `url(${bgVideo})` : val.type === "VIDEO" ? `url(${bgVideo})` : "",
+                    backgroundSize: "cover",
+                  }}
                 >
                   {val.type === "IMAGE" ? (
                     <img src={val.media} height="250px" width="100%" />
@@ -75,7 +84,7 @@ export default function Home() {
                       <source src={val.media} type="video/ogg" />
                     </video>
                   ) : val.type === "AUDIO" ? (
-                    <audio controls style={{}}>
+                    <audio controls>
                       <source src={val.media} type="audio/ogg" />
                       <source src={val.media} type="audio/mpeg" />
                     </audio>
