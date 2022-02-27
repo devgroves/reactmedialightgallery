@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { CircularProgress, Modal, IconButton, ButtonGroup, Button, Tooltip } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import CloseIcon from "@mui/icons-material/Close";
@@ -58,11 +58,24 @@ const useStyles = makeStyles((theme) =>
 
 export default function LightBox(props) {
   const classes = useStyles();
+  const inputRef = useRef();
   const { mediaItems, callback, parentShowNext, parentShowPrev } = props;
   const [toggler, setToggler] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(props.currentSlide);
   const [media, setMedia] = useState(mediaItems[currentSlide].media);
-
+  const setToFullScreen = () => {
+    const el = inputRef.current;
+    console.log(el);
+    if (el.requestFullscreen) {
+      el.requestFullscreen();
+    } else if (el.msRequestFullscreen) {
+      el.msRequestFullscreen();
+    } else if (el.mozRequestFullScreen) {
+      el.mozRequestFullScreen();
+    } else if (el.webkitRequestFullscreen) {
+      el.webkitRequestFullscreen();
+    }
+  };
   const toggleIsOpen = () => {
     console.log("toggle is open", toggler);
     setToggler(!toggler);
@@ -142,7 +155,7 @@ export default function LightBox(props) {
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="Full Screen" arrow>
-                    <IconButton onClick={toggleIsOpen} className={classes.arrowButton} size="small">
+                    <IconButton onClick={setToFullScreen} className={classes.arrowButton} size="small">
                       <FullscreenIcon />
                     </IconButton>
                   </Tooltip>
@@ -165,7 +178,7 @@ export default function LightBox(props) {
               </IconButton>
             </div>
             {media ? (
-              <div style={{ display: "contents" }}>
+              <div style={{ display: "contents" }} ref={inputRef}>
                 {mediaItems[currentSlide].type === "IMAGE" ? (
                   <>
                     <img src={media} alt="Image Broken" className={classes.lightbox} />
