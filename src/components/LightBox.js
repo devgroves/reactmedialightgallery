@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { CircularProgress, Modal, IconButton } from "@mui/material";
+import { CircularProgress, Modal, IconButton, ButtonGroup, Button, Tooltip } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import "./index.css";
+import { saveAs } from "file-saver";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
+import DownloadIcon from "@mui/icons-material/Download";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
+import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -28,11 +34,11 @@ const useStyles = makeStyles((theme) =>
       objectFit: "cover",
     },
     arrowButton: {
-      color: "#ffffff9e",
+      color: "#ffffff",
       "&:hover": {
         backgroundColor: "#808080",
       },
-      backgroundColor: "#696969",
+      // backgroundColor: "#000000",
     },
     audioPlayer: {
       alignItems: "center",
@@ -43,6 +49,9 @@ const useStyles = makeStyles((theme) =>
     circular: {
       alignItems: "center",
       justifyContent: "center",
+    },
+    widget: {
+      marginRight: 20,
     },
   })
 );
@@ -101,6 +110,9 @@ export default function LightBox(props) {
       showNext(event);
     }
   };
+  const downloadMedia = () => {
+    saveAs(media, `media`);
+  };
   return (
     <>
       {toggler ? (
@@ -112,15 +124,39 @@ export default function LightBox(props) {
                   {currentSlide + 1}/{mediaItems.length}
                 </h4>
               </div>
-              <div className="item-count">
+              {/* <div className="item-count">
                 <h5 style={{ color: "#fff" }}>
                   {mediaItems[currentSlide].caption ? mediaItems[currentSlide].caption : ""}
                 </h5>
-              </div>
-              <div className="close-btn">
-                <IconButton onClick={toggleIsOpen} className={classes.arrowButton} size="small">
-                  <CloseIcon />
-                </IconButton>
+              </div> */}
+              <div className={classes.widget}>
+                <ButtonGroup disableElevation>
+                  <Tooltip title="Zoom In" arrow>
+                    <IconButton onClick={toggleIsOpen} className={classes.arrowButton} size="small">
+                      <ZoomInIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Zoom Out" arrow>
+                    <IconButton onClick={toggleIsOpen} className={classes.arrowButton} size="small">
+                      <ZoomOutIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Full Screen" arrow>
+                    <IconButton onClick={toggleIsOpen} className={classes.arrowButton} size="small">
+                      <FullscreenIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Download" arrow>
+                    <IconButton onClick={downloadMedia} className={classes.arrowButton} size="small">
+                      <DownloadIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Close" arrow>
+                    <IconButton onClick={toggleIsOpen} className={classes.arrowButton} size="small">
+                      <CloseIcon />
+                    </IconButton>
+                  </Tooltip>
+                </ButtonGroup>
               </div>
             </div>
             <div className="left">
