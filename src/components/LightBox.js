@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) =>
     },
     widget: {
       marginRight: 20,
+      zIndex: 999999,
     },
   })
 );
@@ -63,6 +64,7 @@ export default function LightBox(props) {
   const [toggler, setToggler] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(props.currentSlide);
   const [media, setMedia] = useState(mediaItems[currentSlide].media);
+  const [scale, setScale] = useState(1);
   const setToFullScreen = () => {
     const el = inputRef.current;
     console.log(el);
@@ -126,6 +128,12 @@ export default function LightBox(props) {
   const downloadMedia = () => {
     saveAs(media, `media`);
   };
+  const ZoomIn = () => {
+    setScale(scale * 1.1);
+  };
+  const ZoomOut = () => {
+    setScale(scale / 1.1);
+  };
   return (
     <>
       {toggler ? (
@@ -145,12 +153,12 @@ export default function LightBox(props) {
               <div className={classes.widget}>
                 <ButtonGroup disableElevation>
                   <Tooltip title="Zoom In" arrow>
-                    <IconButton onClick={toggleIsOpen} className={classes.arrowButton} size="small">
+                    <IconButton onClick={ZoomIn} className={classes.arrowButton} size="small">
                       <ZoomInIcon />
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="Zoom Out" arrow>
-                    <IconButton onClick={toggleIsOpen} className={classes.arrowButton} size="small">
+                    <IconButton onClick={ZoomOut} className={classes.arrowButton} size="small">
                       <ZoomOutIcon />
                     </IconButton>
                   </Tooltip>
@@ -180,11 +188,11 @@ export default function LightBox(props) {
             {media ? (
               <div style={{ display: "contents" }} ref={inputRef}>
                 {mediaItems[currentSlide].type === "IMAGE" ? (
-                  <>
+                  <div style={{ transform: `scale(${scale})` }}>
                     <img src={media} alt="Image Broken" className={classes.lightbox} />
-                  </>
+                  </div>
                 ) : mediaItems[currentSlide].type === "VIDEO" ? (
-                  <div>
+                  <div style={{ transform: `scale(${scale})` }}>
                     <video className={classes.lightbox} controls>
                       <source src={media} type="video/mp4" />
                       <source src={media} type="video/ogg" />
