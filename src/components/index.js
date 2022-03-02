@@ -77,6 +77,7 @@ export default function Home() {
                     backgroundImage:
                       val.type === "AUDIO" ? `url(${bgVideo})` : val.type === "VIDEO" ? `url(${bgVideo})` : "",
                     backgroundSize: "cover",
+                    justifyContent: "center",
                   }}
                 >
                   {val.type === "IMAGE" ? (
