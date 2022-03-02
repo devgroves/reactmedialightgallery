@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) =>
     audioPlayer: {
       alignItems: "center",
       justifyContent: "center",
-      width: "30%",
+      // width: "30%",
       height: "auto",
     },
     circular: {
@@ -57,6 +57,8 @@ const useStyles = makeStyles((theme) =>
     caption: {
       color: "#fff",
       marginTop: -1,
+      display: "flex",
+      justifyContent: "center",
     },
   })
 );
@@ -205,7 +207,7 @@ export default function LightBox(props) {
                   </div>
                 ) : mediaItems[currentSlide].type === "AUDIO" ? (
                   <div className={classes.audioPlayer}>
-                    <audio src={media} controls autoPlay />
+                    <audio src={media} controls />
                     <h5 className={classes.caption}>
                       {mediaItems[currentSlide].caption ? mediaItems[currentSlide].caption : ""}
                     </h5>

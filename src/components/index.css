@@ -21,6 +21,7 @@
   top: 0px;
   padding-left: 10px;
   padding-right: 10px;
+  z-index: 9999;
 }
 .close-btn {
   padding: 7px;
