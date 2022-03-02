@@ -54,6 +54,10 @@ const useStyles = makeStyles((theme) =>
       marginRight: 20,
       zIndex: 999999,
     },
+    caption: {
+      color: "#fff",
+      marginTop: -1,
+    },
   })
 );
 
@@ -145,11 +149,6 @@ export default function LightBox(props) {
                   {currentSlide + 1}/{mediaItems.length}
                 </h4>
               </div>
-              {/* <div className="item-count">
-                <h5 style={{ color: "#fff" }}>
-                  {mediaItems[currentSlide].caption ? mediaItems[currentSlide].caption : ""}
-                </h5>
-              </div> */}
               <div className={classes.widget}>
                 <ButtonGroup disableElevation>
                   <Tooltip title="Zoom In" arrow>
@@ -190,6 +189,9 @@ export default function LightBox(props) {
                 {mediaItems[currentSlide].type === "IMAGE" ? (
                   <div style={{ transform: `scale(${scale})` }}>
                     <img src={media} alt="Image Broken" className={classes.lightbox} />
+                    <h5 className={classes.caption}>
+                      {mediaItems[currentSlide].caption ? mediaItems[currentSlide].caption : ""}
+                    </h5>
                   </div>
                 ) : mediaItems[currentSlide].type === "VIDEO" ? (
                   <div style={{ transform: `scale(${scale})` }}>
@@ -197,10 +199,16 @@ export default function LightBox(props) {
                       <source src={media} type="video/mp4" />
                       <source src={media} type="video/ogg" />
                     </video>
+                    <h5 className={classes.caption}>
+                      {mediaItems[currentSlide].caption ? mediaItems[currentSlide].caption : ""}
+                    </h5>
                   </div>
                 ) : mediaItems[currentSlide].type === "AUDIO" ? (
                   <div className={classes.audioPlayer}>
                     <audio src={media} controls autoPlay />
+                    <h5 className={classes.caption}>
+                      {mediaItems[currentSlide].caption ? mediaItems[currentSlide].caption : ""}
+                    </h5>
                   </div>
                 ) : null}
               </div>
