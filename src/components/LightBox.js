@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { CircularProgress, Modal, IconButton, ButtonGroup, Button, Tooltip } from "@mui/material";
+import { CircularProgress, Modal, IconButton, ButtonGroup, Tooltip } from "@mui/material";
 import { createStyles, makeStyles } from "@mui/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import "./index.css";
 import { saveAs } from "file-saver";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import DownloadIcon from "@mui/icons-material/Download";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
@@ -71,6 +70,7 @@ export default function LightBox(props) {
   const [currentSlide, setCurrentSlide] = useState(props.currentSlide);
   const [media, setMedia] = useState(mediaItems[currentSlide].media);
   const [scale, setScale] = useState(1);
+  const [isScalable, setIsScalable] = useState(false);
   const setToFullScreen = () => {
     const el = inputRef.current;
     console.log(el);
@@ -91,6 +91,11 @@ export default function LightBox(props) {
   };
   useEffect(() => {
     console.log("set media items", mediaItems[currentSlide].media);
+    if (mediaItems[currentSlide].type === "VIDEO" || mediaItems[currentSlide].type === "IMAGE" ) {
+      setIsScalable(true);
+    } else {
+      setIsScalable(false);
+    }
     setMedia(mediaItems[currentSlide].media);
   }, [mediaItems, currentSlide]);
 
@@ -103,6 +108,11 @@ export default function LightBox(props) {
       currentIndex = currentIndex - 1;
     }
     setCurrentSlide(currentIndex);
+    if (mediaItems[currentIndex].type === "VIDEO" || mediaItems[currentIndex].type === "IMAGE" ) {
+      setIsScalable(true);
+    } else {
+      setIsScalable(false);
+    }
     setMedia(mediaItems[currentIndex].media);
     parentShowPrev(e);
   };
@@ -116,7 +126,12 @@ export default function LightBox(props) {
       currentIndex = currentIndex + 1;
     }
     setCurrentSlide(currentIndex);
-    console.log("currentSlide after ", currentIndex, currentSlide);
+    console.log("currentSlide after ", currentIndex, currentSlide, mediaItems[currentIndex].type);
+    if (mediaItems[currentIndex].type === "VIDEO" || mediaItems[currentIndex].type === "IMAGE" ) {
+      setIsScalable(true);
+    } else {
+      setIsScalable(false);
+    }
     setMedia(mediaItems[currentIndex].media);
     //shownext chaining parent event method definition also.
     parentShowNext(e);
@@ -153,7 +168,7 @@ export default function LightBox(props) {
               </div>
               <div className={classes.widget}>
                 <ButtonGroup disableElevation>
-                  <Tooltip title="Zoom In" arrow>
+                { isScalable ? <div> <Tooltip title="Zoom In" arrow>
                     <IconButton onClick={ZoomIn} className={classes.arrowButton} size="small">
                       <ZoomInIcon />
                     </IconButton>
@@ -167,7 +182,8 @@ export default function LightBox(props) {
                     <IconButton onClick={setToFullScreen} className={classes.arrowButton} size="small">
                       <FullscreenIcon />
                     </IconButton>
-                  </Tooltip>
+                  </Tooltip> </div>
+                  : null }
                   <Tooltip title="Download" arrow>
                     <IconButton onClick={downloadMedia} className={classes.arrowButton} size="small">
                       <DownloadIcon />

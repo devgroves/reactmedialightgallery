@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Grid, Box, styled, Paper } from "@mui/material";
+import { Grid, styled, Paper } from "@mui/material";
 import video1 from "./assets/city.mp4";
 import audio1 from "./assets/sample.mp3";
 import LightBox from "./LightBox";
-import bgAudio from "./assets/audio.png";
 import bgVideo from "./assets/video.jpg";
 const image1 =
   "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80";
@@ -15,33 +14,37 @@ const data = [
   {
     media: image1,
     type: "IMAGE",
-    caption: "Sample Image 1",
+    caption: "Zoom Photo Image",
   },
   {
     media: image2,
     type: "IMAGE",
+    caption: "Bubble Splash Image",
   },
   {
     media: video1,
     type: "VIDEO",
-    caption: "Sample Caption Video for Lightbox",
+    caption: "City Traffic Video",
   },
   {
     media: image3,
     type: "IMAGE",
+    caption: "Splendid Nature Image"
   },
   {
     media: image4,
     type: "IMAGE",
+    caption: "Wallpaper Cave",
   },
   {
     media: image5,
     type: "IMAGE",
+    caption: "Spider Man Image",
   },
   {
     media: audio1,
     type: "AUDIO",
-    caption: "Sample Caption Audio for Lightbox",
+    caption: "Demo Music",
   },
 ];
 const Item = styled(Paper)(({ theme }) => ({
@@ -56,10 +59,9 @@ export default function Home() {
   return (
     <div
       style={{
-        backgroundColor: "gray",
+        backgroundColor: "#c0d6df",
       }}
     >
-      <h3>Examples</h3>
       <div>
         <div style={Style}>
           {data ? (
