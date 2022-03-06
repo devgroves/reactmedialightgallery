@@ -3,7 +3,6 @@ import { CircularProgress, Modal, IconButton, ButtonGroup, Tooltip } from "@mui/
 import { createStyles, makeStyles } from "@mui/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import "./index.css";
-import { saveAs } from "file-saver";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import DownloadIcon from "@mui/icons-material/Download";
