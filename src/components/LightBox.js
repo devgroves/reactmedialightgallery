@@ -9,6 +9,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
+import ShareIcon from '@mui/icons-material/Share';
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -174,6 +175,17 @@ export default function LightBox(props) {
   const ZoomOut = () => {
     setScale(scale / 1.1);
   };
+  const Share = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Media Share',
+        url: media
+      }).then(() => {
+        console.log('Thanks for sharing!');
+      })
+        .catch(console.error);
+    }
+  }
   return (
     <>
       {toggler ? (
@@ -187,6 +199,11 @@ export default function LightBox(props) {
               </div>
               <div className={classes.widget}>
                 <ButtonGroup disableElevation>
+                  <Tooltip title="Download" arrow>
+                    <IconButton onClick={Share} className={classes.arrowButton} size="small">
+                      <ShareIcon />
+                    </IconButton>
+                  </Tooltip>
                   {isScalable ? <div> <Tooltip title="Zoom In" arrow>
                     <IconButton onClick={ZoomIn} className={classes.arrowButton} size="small">
                       <ZoomInIcon />
