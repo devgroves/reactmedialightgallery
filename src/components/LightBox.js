@@ -66,11 +66,11 @@ export default function LightBox(props) {
   const classes = useStyles();
   const inputRef = useRef();
   const { mediaItems, callback, parentShowNext, parentShowPrev } = props;
-  const [toggler, setToggler] = useState(true);
-  const [currentSlide, setCurrentSlide] = useState(props.currentSlide);
-  const [media, setMedia] = useState(mediaItems[currentSlide].media);
-  const [scale, setScale] = useState(1);
-  const [isScalable, setIsScalable] = useState(false);
+  const [ toggler, setToggler ] = useState(true);
+  const [ currentSlide, setCurrentSlide ] = useState(props.currentSlide);
+  const [ media, setMedia ] = useState(mediaItems[ currentSlide ].media);
+  const [ scale, setScale ] = useState(1);
+  const [ isScalable, setIsScalable ] = useState(false);
   const setToFullScreen = () => {
     const el = inputRef.current;
     console.log(el);
@@ -90,14 +90,14 @@ export default function LightBox(props) {
     callback();
   };
   useEffect(() => {
-    console.log("set media items", mediaItems[currentSlide].media);
-    if (mediaItems[currentSlide].type === "VIDEO" || mediaItems[currentSlide].type === "IMAGE" ) {
+    console.log("set media items", mediaItems[ currentSlide ].media);
+    if (mediaItems[ currentSlide ].type === "VIDEO" || mediaItems[ currentSlide ].type === "IMAGE") {
       setIsScalable(true);
     } else {
       setIsScalable(false);
     }
-    setMedia(mediaItems[currentSlide].media);
-  }, [mediaItems, currentSlide]);
+    setMedia(mediaItems[ currentSlide ].media);
+  }, [ mediaItems, currentSlide ]);
 
   const showPrev = (e) => {
     e.stopPropagation();
@@ -108,12 +108,12 @@ export default function LightBox(props) {
       currentIndex = currentIndex - 1;
     }
     setCurrentSlide(currentIndex);
-    if (mediaItems[currentIndex].type === "VIDEO" || mediaItems[currentIndex].type === "IMAGE" ) {
+    if (mediaItems[ currentIndex ].type === "VIDEO" || mediaItems[ currentIndex ].type === "IMAGE") {
       setIsScalable(true);
     } else {
       setIsScalable(false);
     }
-    setMedia(mediaItems[currentIndex].media);
+    setMedia(mediaItems[ currentIndex ].media);
     parentShowPrev(e);
   };
   const showNext = (e) => {
@@ -126,13 +126,13 @@ export default function LightBox(props) {
       currentIndex = currentIndex + 1;
     }
     setCurrentSlide(currentIndex);
-    console.log("currentSlide after ", currentIndex, currentSlide, mediaItems[currentIndex].type);
-    if (mediaItems[currentIndex].type === "VIDEO" || mediaItems[currentIndex].type === "IMAGE" ) {
+    console.log("currentSlide after ", currentIndex, currentSlide, mediaItems[ currentIndex ].type);
+    if (mediaItems[ currentIndex ].type === "VIDEO" || mediaItems[ currentIndex ].type === "IMAGE") {
       setIsScalable(true);
     } else {
       setIsScalable(false);
     }
-    setMedia(mediaItems[currentIndex].media);
+    setMedia(mediaItems[ currentIndex ].media);
     //shownext chaining parent event method definition also.
     parentShowNext(e);
   };
@@ -188,22 +188,22 @@ export default function LightBox(props) {
               </div>
               <div className={classes.widget}>
                 <ButtonGroup disableElevation>
-                { isScalable ? <div> <Tooltip title="Zoom In" arrow>
+                  {isScalable ? <div> <Tooltip title="Zoom In" arrow>
                     <IconButton onClick={ZoomIn} className={classes.arrowButton} size="small">
                       <ZoomInIcon />
                     </IconButton>
                   </Tooltip>
-                  <Tooltip title="Zoom Out" arrow>
-                    <IconButton onClick={ZoomOut} className={classes.arrowButton} size="small">
-                      <ZoomOutIcon />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title="Full Screen" arrow>
-                    <IconButton onClick={setToFullScreen} className={classes.arrowButton} size="small">
-                      <FullscreenIcon />
-                    </IconButton>
-                  </Tooltip> </div>
-                  : null }
+                    <Tooltip title="Zoom Out" arrow>
+                      <IconButton onClick={ZoomOut} className={classes.arrowButton} size="small">
+                        <ZoomOutIcon />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Full Screen" arrow>
+                      <IconButton onClick={setToFullScreen} className={classes.arrowButton} size="small">
+                        <FullscreenIcon />
+                      </IconButton>
+                    </Tooltip> </div>
+                    : null}
                   <Tooltip title="Download" arrow>
                     <IconButton onClick={downloadMedia} className={classes.arrowButton} size="small">
                       <DownloadIcon />
@@ -224,28 +224,28 @@ export default function LightBox(props) {
             </div>
             {media ? (
               <div style={{ display: "contents" }} ref={inputRef}>
-                {mediaItems[currentSlide].type === "IMAGE" ? (
+                {mediaItems[ currentSlide ].type === "IMAGE" ? (
                   <div style={{ transform: `scale(${scale})` }}>
                     <img src={media} alt="Image Broken" className={classes.lightbox} />
                     <h5 className={classes.caption}>
-                      {mediaItems[currentSlide].caption ? mediaItems[currentSlide].caption : ""}
+                      {mediaItems[ currentSlide ].caption ? mediaItems[ currentSlide ].caption : ""}
                     </h5>
                   </div>
-                ) : mediaItems[currentSlide].type === "VIDEO" ? (
+                ) : mediaItems[ currentSlide ].type === "VIDEO" ? (
                   <div style={{ transform: `scale(${scale})` }}>
                     <video className={classes.lightbox} controls>
                       <source src={media} type="video/mp4" />
                       <source src={media} type="video/ogg" />
                     </video>
                     <h5 className={classes.caption}>
-                      {mediaItems[currentSlide].caption ? mediaItems[currentSlide].caption : ""}
+                      {mediaItems[ currentSlide ].caption ? mediaItems[ currentSlide ].caption : ""}
                     </h5>
                   </div>
-                ) : mediaItems[currentSlide].type === "AUDIO" ? (
+                ) : mediaItems[ currentSlide ].type === "AUDIO" ? (
                   <div className={classes.audioPlayer}>
                     <audio src={media} controls />
                     <h5 className={classes.caption}>
-                      {mediaItems[currentSlide].caption ? mediaItems[currentSlide].caption : ""}
+                      {mediaItems[ currentSlide ].caption ? mediaItems[ currentSlide ].caption : ""}
                     </h5>
                   </div>
                 ) : null}
