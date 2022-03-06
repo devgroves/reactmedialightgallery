@@ -69,6 +69,7 @@ export default function LightBox(props) {
   const [ toggler, setToggler ] = useState(true);
   const [ currentSlide, setCurrentSlide ] = useState(props.currentSlide);
   const [ media, setMedia ] = useState(mediaItems[ currentSlide ].media);
+  const [ downloadMediaUrl, setDownloadMediaUrl ] = useState('');
   const [ scale, setScale ] = useState(1);
   const [ isScalable, setIsScalable ] = useState(false);
   const setToFullScreen = () => {
@@ -96,8 +97,13 @@ export default function LightBox(props) {
     } else {
       setIsScalable(false);
     }
+    const mediaUrl = mediaItems[ currentSlide ].media;
+    fetch(mediaUrl).then(res => res.blob()).then(data => {
+      const blobUrl = URL.createObjectURL(data);
+      setDownloadMediaUrl(blobUrl);
+    });
     setMedia(mediaItems[ currentSlide ].media);
-  }, [ mediaItems, currentSlide ]);
+  }, [mediaItems, currentSlide]);
 
   const showPrev = (e) => {
     e.stopPropagation();
@@ -113,6 +119,14 @@ export default function LightBox(props) {
     } else {
       setIsScalable(false);
     }
+    fetch(media).then(res => res.blob()).then(data => {
+      const blobUrl = URL.createObjectURL(data);
+      setDownloadMediaUrl(blobUrl);
+    });
+    fetch(media).then(res => res.blob()).then(data => {
+      const blobUrl = URL.createObjectURL(data);
+      setDownloadMediaUrl(blobUrl);
+    });
     setMedia(mediaItems[ currentIndex ].media);
     parentShowPrev(e);
   };
@@ -132,6 +146,10 @@ export default function LightBox(props) {
     } else {
       setIsScalable(false);
     }
+    fetch(media).then(res => res.blob()).then(data => {
+      const blobUrl = URL.createObjectURL(data);
+      setDownloadMediaUrl(blobUrl);
+    });
     setMedia(mediaItems[ currentIndex ].media);
     //shownext chaining parent event method definition also.
     parentShowNext(e);
@@ -145,29 +163,6 @@ export default function LightBox(props) {
     if (event.code === "ArrowRight") {
       showNext(event);
     }
-  };
-  const downloadMedia = () => {
-    fetch(media).then(res => res.blob()).then(data => {
-      const blobUrl = URL.createObjectURL(data);
-      // Create a link element
-      const link = document.createElement("a");
-      // Set link's href to point to the Blob URL
-      link.href = blobUrl;
-      link.download = "media";
-      // Append link to the body
-      document.body.appendChild(link);
-      // Dispatch click event on the link
-      // This is necessary as link.click() does not work on the latest firefox
-      link.dispatchEvent(
-        new MouseEvent('click', {
-          bubbles: true,
-          cancelable: true,
-          view: window
-        })
-      );
-      // Remove link from body
-      document.body.removeChild(link);
-    })
   };
   const ZoomIn = () => {
     setScale(scale * 1.1);
@@ -199,7 +194,7 @@ export default function LightBox(props) {
               </div>
               <div className={classes.widget}>
                 <ButtonGroup disableElevation>
-                  <Tooltip title="Download" arrow>
+                  <Tooltip title="Share" arrow>
                     <IconButton onClick={Share} className={classes.arrowButton} size="small">
                       <ShareIcon />
                     </IconButton>
@@ -220,11 +215,13 @@ export default function LightBox(props) {
                       </IconButton>
                     </Tooltip> </div>
                     : null}
-                  <Tooltip title="Download" arrow>
-                    <IconButton onClick={downloadMedia} className={classes.arrowButton} size="small">
-                      <DownloadIcon />
-                    </IconButton>
-                  </Tooltip>
+                  <a href={downloadMediaUrl} download>
+                     <Tooltip title="Download" arrow>
+                      <IconButton className={classes.arrowButton} size="small">
+                        <DownloadIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </a>
                   <Tooltip title="Close" arrow>
                     <IconButton onClick={toggleIsOpen} className={classes.arrowButton} size="small">
                       <CloseIcon />
