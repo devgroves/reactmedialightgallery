@@ -9,7 +9,9 @@ import DownloadIcon from "@mui/icons-material/Download";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
-import ShareIcon from '@mui/icons-material/Share';
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import FacebookIcon from "@mui/icons-material/Facebook";
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -194,9 +196,19 @@ export default function LightBox(props) {
               </div>
               <div className={classes.widget}>
                 <ButtonGroup disableElevation>
-                  <Tooltip title="Share" arrow>
+                  <Tooltip title="Facebook" arrow>
                     <IconButton onClick={Share} className={classes.arrowButton} size="small">
-                      <ShareIcon />
+                      <FacebookIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="LinkedIn" arrow>
+                    <IconButton onClick={Share} className={classes.arrowButton} size="small">
+                      <LinkedInIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="WhatsApp" arrow>
+                    <IconButton onClick={Share} className={classes.arrowButton} size="small">
+                      <WhatsAppIcon />
                     </IconButton>
                   </Tooltip>
                   {isScalable ? <div> <Tooltip title="Zoom In" arrow>
