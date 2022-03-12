@@ -172,17 +172,6 @@ export default function LightBox(props) {
   const ZoomOut = () => {
     setScale(scale / 1.1);
   };
-  const Share = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: 'Media Share',
-        url: media
-      }).then(() => {
-        console.log('Thanks for sharing!');
-      })
-        .catch(console.error);
-    }
-  }
   return (
     <>
       {toggler ? (
@@ -197,17 +186,27 @@ export default function LightBox(props) {
               <div className={classes.widget}>
                 <ButtonGroup disableElevation>
                   <Tooltip title="Facebook" arrow>
-                    <IconButton onClick={Share} className={classes.arrowButton} size="small">
+                    <IconButton onClick={()=>{
+                      window.open(
+                        "https://www.facebook.com/sharer/sharer.php?u=" +      media,
+                      );
+                    }} className={classes.arrowButton} size="small">
                       <FacebookIcon />
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="LinkedIn" arrow>
-                    <IconButton onClick={Share} className={classes.arrowButton} size="small">
+                    <IconButton onClick={()=>{
+                      window.open(
+                        "https://www.linkedin.com/sharing/share-offsite/?url=" + media,
+                      );
+                    }} className={classes.arrowButton} size="small">
                       <LinkedInIcon />
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="WhatsApp" arrow>
-                    <IconButton onClick={Share} className={classes.arrowButton} size="small">
+                    <IconButton onClick={()=>{
+                       window.open(`whatsapp://send?text=${media}`);
+                    }} className={classes.arrowButton} size="small">
                       <WhatsAppIcon />
                     </IconButton>
                   </Tooltip>
