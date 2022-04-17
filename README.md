@@ -28,6 +28,7 @@ Once started, open the web application by giving below url in the browser.
   http://localhost:3000
 
 ## Sample Output:
+<img src="./reactmedialightgallery.png" alt="Getting started" />
 <img width="959" alt="image" src="https://user-images.githubusercontent.com/47618675/151733089-e15f7f5c-93f2-4ad7-b8c0-934315acf8a7.png">
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/47618675/151733125-9abf7298-9c4c-4992-b29d-1c3aaac8e446.png">
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/47618675/151733166-d0d2a3d4-edf2-48df-8070-f6566c32d235.png">
