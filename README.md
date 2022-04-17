@@ -1,6 +1,6 @@
-# react-media-lightbox 
+# react-media-lightgallery 
 
-  This light box supported all the media files 
+  Media gallery to show and run through the media items in the gallery with full page view. It is done by react as component to use in react web application. It supports media items like image, audio, video. 
 # Packages Used
   Material Ui - https://mui.com/
   
@@ -8,15 +8,16 @@
 
 ## Install Steps
 
-  1.Clone the git repository git clone https://github.com/princeofv/react-media-lightbox.git
+  1.Clone the git repository git clone https://github.com/devgroves/reactmedialightgallery.git
 
     Get into the directory
 
-  2.cd react-media-lightbox
+  2.cd reactmedialightgallery
 
   3.Then install the node modules dependencies npm install
 ## Startup Instructions
  Start the react web application.
+    npm start
 ### 'npm start'
 
 Once started, open the web application by http://localhost:3000 in the browser.
