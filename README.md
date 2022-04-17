@@ -9,15 +9,19 @@
 ## Install Steps
 
   1.Clone the git repository using below command
+    
     git clone https://github.com/devgroves/reactmedialightgallery.git
 
   2. Get into the cloned directory
+    
     cd reactmedialightgallery
 
   3.Then install the node modules dependencies
+    
     npm install
 ## Startup Instructions
  Start the react web application.
+    
     npm start
 
 Once started, open the web application by giving below url in the browser.
