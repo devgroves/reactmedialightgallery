@@ -8,7 +8,7 @@
 
 ## Install Steps
 
-  1.Clone the git repository using below command 
+  1.Clone the git repository using below command
     git clone https://github.com/devgroves/reactmedialightgallery.git
 
   2. Get into the cloned directory
