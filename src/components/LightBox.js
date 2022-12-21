@@ -94,6 +94,8 @@ export default function LightBox(props) {
   };
   useEffect(() => {
     console.log("set media items", mediaItems[ currentSlide ].media);
+    if (false)
+      console.log("print false");
     if (mediaItems[ currentSlide ].type === "VIDEO" || mediaItems[ currentSlide ].type === "IMAGE") {
       setIsScalable(true);
     } else {
