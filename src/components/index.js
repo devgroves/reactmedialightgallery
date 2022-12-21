@@ -107,6 +107,7 @@ export default function Home() {
         {toggler ? (
           <LightBox
             currentSlide={currentSlide}
+            currentSlide={currentSlide}
             mediaItems={data}
             toggler={toggler}
             parentShowPrev={(e) => {
