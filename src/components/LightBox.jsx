@@ -39,12 +39,10 @@ const useStyles = makeStyles((theme) =>
       "&:hover": {
         backgroundColor: "#808080",
       },
-      // backgroundColor: "#000000",
     },
     audioPlayer: {
       alignItems: "center",
       justifyContent: "center",
-      // width: "30%",
       height: "auto",
     },
     circular: {
@@ -102,10 +100,7 @@ export default function LightBox(props) {
       setIsScalable(false);
     }
     const mediaUrl = mediaItems[ currentSlide ].media;
-    fetch(mediaUrl).then(res => res.blob()).then(data => {
-      const blobUrl = URL.createObjectURL(data);
-      setDownloadMediaUrl(blobUrl);
-    });
+    setDownloadMediaUrlState(mediaUrl);
     setMedia(mediaItems[ currentSlide ].media);
   }, [mediaItems, currentSlide]);
 
@@ -118,19 +113,8 @@ export default function LightBox(props) {
       currentIndex = currentIndex - 1;
     }
     setCurrentSlide(currentIndex);
-    if (mediaItems[ currentIndex ].type === "VIDEO" || mediaItems[ currentIndex ].type === "IMAGE") {
-      setIsScalable(true);
-    } else {
-      setIsScalable(false);
-    }
-    fetch(media).then(res => res.blob()).then(data => {
-      const blobUrl = URL.createObjectURL(data);
-      setDownloadMediaUrl(blobUrl);
-    });
-    fetch(media).then(res => res.blob()).then(data => {
-      const blobUrl = URL.createObjectURL(data);
-      setDownloadMediaUrl(blobUrl);
-    });
+    findIsScalable(mediaItems[ currentIndex ].type);
+    setDownloadMediaUrlState(media);
     setMedia(mediaItems[ currentIndex ].media);
     parentShowPrev(e);
   };
@@ -145,18 +129,26 @@ export default function LightBox(props) {
     }
     setCurrentSlide(currentIndex);
     console.log("currentSlide after ", currentIndex, currentSlide, mediaItems[ currentIndex ].type);
-    if (mediaItems[ currentIndex ].type === "VIDEO" || mediaItems[ currentIndex ].type === "IMAGE") {
+    findIsScalable(mediaItems[ currentIndex ].type);
+    setDownloadMediaUrlState(media);
+    setMedia(mediaItems[ currentIndex ].media);
+    //shownext chaining parent event method definition also.
+    parentShowNext(e);
+  };
+
+  const setDownloadMediaUrlState = (mediaUrl) => {
+    fetch(mediaUrl).then(res => res.blob()).then(data => {
+      const blobUrl = URL.createObjectURL(data);
+      setDownloadMediaUrl(blobUrl);
+    });
+  };
+
+  const findIsScalable = (mediaType) => {
+    if (mediaType === "VIDEO" || mediaType === "IMAGE") {
       setIsScalable(true);
     } else {
       setIsScalable(false);
     }
-    fetch(media).then(res => res.blob()).then(data => {
-      const blobUrl = URL.createObjectURL(data);
-      setDownloadMediaUrl(blobUrl);
-    });
-    setMedia(mediaItems[ currentIndex ].media);
-    //shownext chaining parent event method definition also.
-    parentShowNext(e);
   };
   //Arrow keys handler
   const keyDownHandler = (event) => {
@@ -253,9 +245,9 @@ export default function LightBox(props) {
                 {mediaItems[ currentSlide ].type === "IMAGE" ? (
                   <div style={{ transform: `scale(${scale})` }}>
                     <img src={media} alt="Image Broken" className={classes.lightbox} />
-                    <h5 className={classes.caption}>
-                      {mediaItems[ currentSlide ].caption ? mediaItems[ currentSlide ].caption : ""}
-                    </h5>
+                    { mediaItems[ currentSlide ].caption && <h5 className={classes.caption}>
+                        {mediaItems[ currentSlide ].caption}
+                      </h5> }
                   </div>
                 ) : mediaItems[ currentSlide ].type === "VIDEO" ? (
                   <div style={{ transform: `scale(${scale})` }}>
@@ -263,16 +255,16 @@ export default function LightBox(props) {
                       <source src={media} type="video/mp4" />
                       <source src={media} type="video/ogg" />
                     </video>
-                    <h5 className={classes.caption}>
-                      {mediaItems[ currentSlide ].caption ? mediaItems[ currentSlide ].caption : ""}
-                    </h5>
+                    { mediaItems[ currentSlide ].caption  && <h5 className={classes.caption}>
+                       {mediaItems[ currentSlide ].caption}
+                    </h5> }
                   </div>
                 ) : mediaItems[ currentSlide ].type === "AUDIO" ? (
                   <div className={classes.audioPlayer}>
                     <audio src={media} controls />
-                    <h5 className={classes.caption}>
-                      {mediaItems[ currentSlide ].caption ? mediaItems[ currentSlide ].caption : ""}
-                    </h5>
+                    { mediaItems[ currentSlide ].caption && <h5 className={classes.caption}>
+                       {mediaItems[ currentSlide ].caption}
+                      </h5> }
                   </div>
                 ) : null}
               </div>
