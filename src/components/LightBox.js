@@ -178,9 +178,9 @@ export default function LightBox(props) {
     <>
       {toggler ? (
         <Modal open={toggler} onClose={toggleIsOpen} onKeyDown={keyDownHandler}>
-          <div className="lsbox">
-            <div className="lightbox-header">
-              <div className="item-count">
+          <div class="lsbox">
+            <div class="lightbox-header">
+              <div class="item-count">
                 <h4 style={{ color: "#ffffff9e" }}>
                   {currentSlide + 1}/{mediaItems.length}
                 </h4>
