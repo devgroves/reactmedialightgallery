@@ -87,6 +87,9 @@ export default function LightBox(props) {
   };
   const toggleIsOpen = () => {
     console.log("toggle is open", toggler);
+    fetch("http://localhost:8080").then((res) => {
+      console.log('response ', res);
+    });
     setToggler(!toggler);
     callback();
   };
